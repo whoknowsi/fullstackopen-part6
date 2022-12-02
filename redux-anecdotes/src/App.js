@@ -1,9 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { voteAnecdote } from './reducers/anecdoteReducer'
+import { voteAnecdote, createAnecdote } from './reducers/anecdoteReducer'
 
 const App = () => {
   const anecdotes = useSelector(state => state)
   const dispatch = useDispatch()
+
+  // Uncontrolled form (see https://reactjs.org/docs/uncontrolled-components.html)
+  const handleCreateAnecdote = (evt) => {
+    evt.preventDefault()
+    const anecdote = evt.target.anecdote.value
+    evt.target.anecdote.value = '' 
+    dispatch(createAnecdote(anecdote))
+  }
 
   return (
     <div>
@@ -20,8 +28,8 @@ const App = () => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
+      <form onSubmit={handleCreateAnecdote}>
+        <div><input name='anecdote' /></div>
         <button>create</button>
       </form>
     </div>

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import { setNotification, clearNotification } from '../reducers/notificationReducer'
 import { useEffect } from 'react'
-import anecdoteService from '../services/anecdotes'
+
 const mapStateToAnecdotesSorteredAndFiltered = (state) => {
     return state.anecdotes.filter((anecdote) => anecdote.content.toLowerCase().includes(state.filter.value)).sort((a, b) => b.votes - a.votes)
 }
@@ -12,13 +12,8 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const getAnecdotes = async () => {
-            const anecdotes = await anecdoteService.getAll()
-            dispatch(initializeAnecdotes(anecdotes))
-        }
-        getAnecdotes()
+        dispatch(initializeAnecdotes())
     }, [dispatch])
-
 
     const handleVote = (anecdote) => {
         dispatch(voteAnecdote(anecdote.id))

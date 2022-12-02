@@ -16,7 +16,7 @@ const AnecdoteList = () => {
     }, [dispatch])
 
     const handleVote = (anecdote) => {
-        dispatch(voteAnecdote(anecdote.id))
+        dispatch(voteAnecdote(anecdote))
         const notificationTimeout = setTimeout(() => dispatch(clearNotification()), 5000)
         dispatch(setNotification(`You voted for: '${anecdote.content}'`, notificationTimeout))
     }

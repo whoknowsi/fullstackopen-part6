@@ -7,7 +7,14 @@ const getAll = async () => {
     return response.data
 }
 
+const createNew = async (content) => {
+    const object = { content, votes: 0 }
+    const response = await axios.post(BASE_URL, object)
+    return response.data
+}
+
 // eslint-disable-next-line
 export default {
-    getAll
+    getAll,
+    createNew
 } 
